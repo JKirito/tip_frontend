@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ErrorMessage } from '../interface';
+import React, { useState, useEffect, FormEventHandler } from 'react';
+import { ErrorMessage, TokenData } from '../interface';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 
 const Login = () => {
@@ -8,15 +8,18 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState<boolean>(false);
   const [user, setUser] = useState('');
 
-  const handleSubmit = async () => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     axios
       .post('http://localhost:4000/login', {
         username,
         password,
       })
       .then((res: AxiosResponse) => {
-        console.log(res.data);
-        // setLoginStatus(true);
+        const result: TokenData = res.data;
+        const { token } = result;
+        localStorage.setItem('token', token);
+        setLoginStatus(true);
         console.log('Logged In Successfully');
       })
       .catch((err: AxiosError) => {
@@ -27,17 +30,21 @@ const Login = () => {
 
   useEffect(() => {
     const checkStatus = async () => {
+      const token = localStorage.getItem('token');
       await axios
-        .get('http://localhost:4000/')
+        .get('http://localhost:4000/validate', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => {
           console.log(res.data);
-          if (res.data.username) {
-            setLoginStatus(true);
-          } else {
-            setLoginStatus(false);
-          }
+          setLoginStatus(true);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setLoginStatus(false);
+        });
     };
     checkStatus();
   }, []);
@@ -64,11 +71,11 @@ const Login = () => {
       )}
 
       {!loginStatus && (
-        <form>
+        <form onSubmit={onSubmit}>
           <span>Username</span>
           <input
             type='text'
-            name='username'
+            // name='username'
             autoComplete='username'
             onChange={(e) => {
               setUsername(e.target.value);
@@ -78,16 +85,14 @@ const Login = () => {
           <span>Password</span>
           <input
             type='password'
-            name='password'
+            // name='password'
             autoComplete='current-password'
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
           <br />
-          <button type='submit' onClick={handleSubmit}>
-            Login
-          </button>
+          <button type='submit'>Login</button>
         </form>
       )}
     </div>

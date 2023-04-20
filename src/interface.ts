@@ -7,3 +7,7 @@ export interface ErrorMessage {
   msg: string;
   code: number;
 }
+
+export interface TokenData {
+  token: string;
+}
