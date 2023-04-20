@@ -5,5 +5,5 @@ export interface BaseUser {
 
 export interface ErrorMessage {
   msg: string;
-  code: string;
+  code: number;
 }
