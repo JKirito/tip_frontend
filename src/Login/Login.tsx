@@ -1,12 +1,18 @@
 import React, { useState, useEffect, FormEventHandler } from 'react';
 import { ErrorMessage, TokenData } from '../interface';
 import axios, { AxiosResponse, AxiosError } from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../states/store';
+import { login, logout } from '../states/slices/userSlice';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loginStatus, setLoginStatus] = useState<boolean>(false);
-  const [user, setUser] = useState('');
+  // const [loginStatus, setLoginStatus] = useState<boolean>(false);
+  // const [user, setUser] = useState('');
+  const user = useSelector((state: RootState) => state.user);
+  const loginStatus = useSelector((state: RootState) => state.user.loginstatus);
+  const dispatch = useDispatch();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,7 +25,12 @@ const Login = () => {
         const result: TokenData = res.data;
         const { token } = result;
         localStorage.setItem('token', token);
-        setLoginStatus(true);
+        dispatch(
+          login({
+            loginstatus: true,
+            username: username,
+          })
+        );
         console.log('Logged In Successfully');
       })
       .catch((err: AxiosError) => {
@@ -38,12 +49,16 @@ const Login = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          setLoginStatus(true);
+          // console.log(res.data);
+          dispatch(
+            login({
+              loginstatus: true,
+              username: res.data.username,
+            })
+          );
         })
         .catch((err) => {
-          console.log(err);
-          setLoginStatus(false);
+          dispatch(logout());
         });
     };
     checkStatus();
@@ -53,17 +68,20 @@ const Login = () => {
     await axios
       .post('http://localhost:4000/logout')
       .then((data) => {
+        localStorage.removeItem('token');
         console.log('logged Out Successfully');
-        setLoginStatus(false);
+        dispatch(logout());
       })
-      .catch((err) => console.error);
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
     <div>
       {loginStatus && (
         <div>
-          <h1>Welcome {user}, please log out</h1>
+          <h1>Welcome {user.username}, please log out</h1>
           <button type='submit' onClick={handleLogout}>
             Logout
           </button>
@@ -75,7 +93,6 @@ const Login = () => {
           <span>Username</span>
           <input
             type='text'
-            // name='username'
             autoComplete='username'
             onChange={(e) => {
               setUsername(e.target.value);
@@ -85,7 +102,6 @@ const Login = () => {
           <span>Password</span>
           <input
             type='password'
-            // name='password'
             autoComplete='current-password'
             onChange={(e) => {
               setPassword(e.target.value);
