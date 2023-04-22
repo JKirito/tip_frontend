@@ -58,7 +58,7 @@ const Login = () => {
           );
         })
         .catch((err) => {
-          dispatch(logout());
+          // dispatch(logout());
         });
     };
     checkStatus();
