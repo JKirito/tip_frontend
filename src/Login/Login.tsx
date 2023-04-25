@@ -4,23 +4,24 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../states/store';
 import { login, logout } from '../states/slices/userSlice';
+import authorizedInstance from '../axiosInstances/authInstance';
+import baseInstance from '../axiosInstances/baseInstance';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   // const [loginStatus, setLoginStatus] = useState<boolean>(false);
   // const [user, setUser] = useState('');
+  const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user);
   const loginStatus = useSelector((state: RootState) => state.user.loginstatus);
   const dispatch = useDispatch();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios
-      .post('http://localhost:4000/login', {
-        username,
-        password,
-      })
+    baseInstance
+      .post('/login', { username, password })
       .then((res: AxiosResponse) => {
         const result: TokenData = res.data;
         const { token } = result;
@@ -32,6 +33,7 @@ const Login = () => {
           })
         );
         console.log('Logged In Successfully');
+        navigate('/');
       })
       .catch((err: AxiosError) => {
         const data: ErrorMessage = err.response?.data as ErrorMessage;
@@ -42,12 +44,9 @@ const Login = () => {
   useEffect(() => {
     const checkStatus = async () => {
       const token = localStorage.getItem('token');
-      await axios
-        .get('http://localhost:4000/validate', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+
+      await authorizedInstance
+        .get('/validate')
         .then((res) => {
           // console.log(res.data);
           dispatch(
