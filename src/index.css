@@ -11,6 +11,14 @@
   .linkbtn {
     border-bottom: 2px solid #bbbbbb;
   }
+  .btn-green {
+    background-color: #68edc6;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  .btn-green:hover {
+    background-color: #5acfac;
+  }
 }
 
 :root {

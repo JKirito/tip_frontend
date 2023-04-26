@@ -20,7 +20,7 @@ import { login } from './states/slices/userSlice';
 import JobBoard from './jobBoard/JobBoard';
 import JobPost from './jobBoard/JobPost';
 
-function App() {
+function  App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

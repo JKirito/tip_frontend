@@ -6,7 +6,7 @@ import { RootState } from '../states/store';
 import { login, logout } from '../states/slices/userSlice';
 import authorizedInstance from '../axiosInstances/authInstance';
 import baseInstance from '../axiosInstances/baseInstance';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -92,6 +92,7 @@ const Login = () => {
           <span>Username</span>
           <input
             type='text'
+            className='input_text'
             autoComplete='username'
             onChange={(e) => {
               setUsername(e.target.value);
@@ -101,13 +102,25 @@ const Login = () => {
           <span>Password</span>
           <input
             type='password'
+            className='input_text'
             autoComplete='current-password'
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
           <br />
-          <button type='submit'>Login</button>
+          <button
+            type='submit'
+            className='btn-green px-7 uppercase font-medium'
+          >
+            Login
+          </button>
+          <p>
+            Don't have an account?{' '}
+            <Link to='/signup'>
+              <span className='underline'>Sign Up</span>
+            </Link>
+          </p>
         </form>
       )}
     </div>
