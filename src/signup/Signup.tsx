@@ -19,7 +19,7 @@ const Signup = () => {
       })
       .then((res) => {
         console.log(`Signup Successful`);
-        // navigate('/login');
+        navigate('/login');
       })
       .catch((err) => console.error);
   };
