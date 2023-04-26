@@ -17,6 +17,8 @@ import Home from './Home/Home';
 import { useEffect } from 'react';
 import authorizedInstance from './axiosInstances/authInstance';
 import { login } from './states/slices/userSlice';
+import JobBoard from './jobBoard/JobBoard';
+import JobPost from './jobBoard/JobPost';
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +57,8 @@ function App() {
       <Route index path='/' element={<Home />}></Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/signup' element={<Signup />}></Route>
+      <Route path='/jobs' element={<JobBoard />}></Route>
+      <Route path='/jobposts' element={<JobPost />}></Route>
     </Routes>
   );
 }
