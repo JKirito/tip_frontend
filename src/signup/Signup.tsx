@@ -13,6 +13,10 @@ const Signup = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(data);
+    if (data.username === '' || data.password === '') {
+      console.log(`Credentials not specified`);
+      return;
+    }
     baseInstance
       .post('/signup', {
         ...data,
@@ -35,14 +39,28 @@ const Signup = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>username</label>
-        <input type='text' name='username' onChange={handleChange} />
+        <label className='font-medium capitalize'>username</label>
+        <input
+          type='text'
+          name='username'
+          onChange={handleChange}
+          className='input_text font-medium'
+        />
         <br />
-        <label>Password</label>
-        <input type='password' name='password' onChange={handleChange} />
+        <label className='font-medium capitalize'>Password</label>
+        <input
+          type='password'
+          name='password'
+          onChange={handleChange}
+          className='input_text font-medium'
+        />
         {/* <input type='text' name='' /> */}
         <br />
-        <input type='submit' value='Submit' />
+        <input
+          type='submit'
+          value='Submit'
+          className='btn-green uppercase font-medium'
+        />
       </form>
     </div>
   );
