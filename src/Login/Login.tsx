@@ -6,7 +6,7 @@ import { RootState } from '../states/store';
 import { login, logout } from '../states/slices/userSlice';
 import authorizedInstance from '../axiosInstances/authInstance';
 import baseInstance from '../axiosInstances/baseInstance';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -41,27 +41,27 @@ const Login = () => {
       });
   };
 
-  useEffect(() => {
-    const checkStatus = async () => {
-      const token = localStorage.getItem('token');
+  // useEffect(() => {
+  //   const checkStatus = async () => {
+  //     const token = localStorage.getItem('token');
 
-      await authorizedInstance
-        .get('/validate')
-        .then((res) => {
-          // console.log(res.data);
-          dispatch(
-            login({
-              loginstatus: true,
-              username: res.data.username,
-            })
-          );
-        })
-        .catch((err) => {
-          // dispatch(logout());
-        });
-    };
-    checkStatus();
-  }, []);
+  //     await authorizedInstance
+  //       .get('/validate')
+  //       .then((res) => {
+  //         // console.log(res.data);
+  //         dispatch(
+  //           login({
+  //             loginstatus: true,
+  //             username: res.data.username,
+  //           })
+  //         );
+  //       })
+  //       .catch((err) => {
+  //         // dispatch(logout());
+  //       });
+  //   };
+  //   checkStatus();
+  // }, []);
 
   const handleLogout = async () => {
     await axios
@@ -78,14 +78,7 @@ const Login = () => {
 
   return (
     <div>
-      {loginStatus && (
-        <div>
-          <h1>Welcome {user.username}, please log out</h1>
-          <button type='submit' onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      )}
+      {loginStatus && <Navigate to='/' />}
 
       {!loginStatus && (
         <form onSubmit={onSubmit}>
