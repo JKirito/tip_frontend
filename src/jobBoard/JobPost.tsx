@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
-interface JobPost {
-  title: string;
-  subject: string;
-  location: string;
-  description: string;
-}
+import { JobPostData } from '../interface';
+import authorizedInstance from '../axiosInstances/authInstance';
 
 const JobPost = () => {
-  const [post, setPost] = useState<JobPost>({
+  const [post, setPost] = useState<JobPostData>({
     description: '',
     location: '',
     subject: '',
@@ -30,11 +25,17 @@ const JobPost = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    authorizedInstance
+      .post('/jobpost', { ...post })
+      .then((res) => {
+        console.log(`Successful Job Creation`);
+      })
+      .catch((err) => console.error);
   };
 
   return (
     <div>
-      <form className='flex flex-col'>
+      <form className='flex flex-col' onSubmit={handleSubmit}>
         <p className='self-start text-xl bold'>Job Posting</p>
         <div className='flex flex-col'>
           <label className='self-start'>Title</label>
