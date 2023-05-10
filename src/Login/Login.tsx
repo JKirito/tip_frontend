@@ -24,12 +24,13 @@ const Login = () => {
       .post('/login', { username, password })
       .then((res: AxiosResponse) => {
         const result: TokenData = res.data;
-        const { token } = result;
+        const { token, role } = result;
         localStorage.setItem('token', token);
         dispatch(
           login({
             loginstatus: true,
             username: username,
+            role: role,
           })
         );
         console.log('Logged In Successfully');

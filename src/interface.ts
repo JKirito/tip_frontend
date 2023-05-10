@@ -8,6 +8,7 @@ export interface JobPostData {
   subject: string;
   location: string;
   description: string;
+  jobType: JobType;
 }
 export interface ErrorMessage {
   msg: string;
@@ -16,6 +17,7 @@ export interface ErrorMessage {
 
 export interface TokenData {
   token: string;
+  role: Roles;
 }
 
 export interface JobsFetchData {
@@ -25,4 +27,19 @@ export interface JobsFetchData {
   description: string;
   user_id: string;
   username: string;
+  jobType: JobType;
+}
+
+export enum Roles {
+  ADMIN = 'admin',
+  BASIC = 'basic',
+}
+
+export enum JobType {
+  FULL_TIME = 'full-time',
+  PART_TIME = 'part-time',
+  CONTRACT = 'contract',
+  INTERNSHIP = 'internship',
+  VOLUNTEER = 'volunteer',
+  OTHER = 'other',
 }
