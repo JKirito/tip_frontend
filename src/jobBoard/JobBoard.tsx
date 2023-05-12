@@ -42,7 +42,7 @@ const JobBoard = () => {
     setFileteredJobs(filteredJobs);
     setIsFiltered(true);
     console.log(filteredJobs);
-  }, [searchQuery]);
+  }, [searchQuery, jobs]);
 
   const handleFiltering = () => {
     let filteredJobs = jobs.filter((job) => job.jobType === jobTypeFilter);
@@ -63,6 +63,13 @@ const JobBoard = () => {
     setIsFiltered(true);
   };
 
+  const resetFilters = () => {
+    setJobTypeFilter(JobType.FULL_TIME);
+    setSearchQuery('');
+    setIsFiltered(false);
+    setFileteredJobs(jobs);
+  };
+
   return (
     <div>
       <h1 className='text-4xl text-center mt-3 mb-3 capitalize'>Job Board</h1>
@@ -73,23 +80,32 @@ const JobBoard = () => {
           className='input_text w-full'
           onChange={(e) => {
             setSearchQuery(e.target.value);
+            setIsFiltered(true);
           }}
         />
         <div className='flex flex-row justify-between mt-4'>
-          <select
-            name='jboxselect'
-            id='jboxselect'
-            onChange={handleSelectboxChange}
-          >
-            <option value={JobType.FULL_TIME}>{JobType.FULL_TIME}</option>
-            <option value={JobType.PART_TIME}>{JobType.PART_TIME}</option>
-            <option value={JobType.CONTRACT}>{JobType.CONTRACT}</option>
-            <option value={JobType.INTERNSHIP}>{JobType.INTERNSHIP}</option>
-            <option value={JobType.VOLUNTEER}>{JobType.VOLUNTEER}</option>
-            <option value={JobType.OTHER}>{JobType.OTHER}</option>
-          </select>
+          <div>
+            <select
+              name='jboxselect'
+              id='jboxselect'
+              onChange={handleSelectboxChange}
+            >
+              <option value={JobType.FULL_TIME}>{JobType.FULL_TIME}</option>
+              <option value={JobType.PART_TIME}>{JobType.PART_TIME}</option>
+              <option value={JobType.CONTRACT}>{JobType.CONTRACT}</option>
+              <option value={JobType.INTERNSHIP}>{JobType.INTERNSHIP}</option>
+              <option value={JobType.VOLUNTEER}>{JobType.VOLUNTEER}</option>
+              <option value={JobType.OTHER}>{JobType.OTHER}</option>
+            </select>
+            <button
+              className='input_text ml-4 bg-[#f0dc6b] font-bold text-black px-4 py-2 border-0'
+              onClick={resetFilters}
+            >
+              Reset Filters
+            </button>
+          </div>
           <button
-            className='input_text ml-auto bg-[#68edc6] font-bold text-black px-4 py-2 border-0'
+            className='input_text ml-auto bg-[#456fe4] font-bold text-white px-4 py-2 border-0'
             onClick={handleFiltering}
           >
             Search
@@ -136,6 +152,13 @@ const JobBoard = () => {
           })}
       </div>
       <div className='mt-4'>
+        {filteredJobs.length === 0 && (
+          <div className='w-full h-16 flex'>
+            <div className='text-center m-auto'>
+              <span className='text-2xl text-gray-700'>No Jobs Found</span>
+            </div>
+          </div>
+        )}
         {isFiltered &&
           filteredJobs.map((job, index) => {
             return (

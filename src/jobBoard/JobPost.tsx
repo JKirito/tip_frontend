@@ -45,9 +45,9 @@ const JobPost = () => {
   };
 
   return (
-    <div>
+    <div className='mt-5'>
       <form className='flex flex-col' onSubmit={handleSubmit}>
-        <p className='self-start text-xl bold'>Job Posting</p>
+        <p className='self-start text-xl bold'>Post a Job</p>
         <div className='flex flex-col mt-4'>
           <label className='self-start text-xl capitalize'>Title</label>
           <input
@@ -85,7 +85,7 @@ const JobPost = () => {
           <select
             name=''
             id=''
-            className='text-md'
+            className='text-md ml-4'
             onChange={handleOptionChange}
           >
             <option value={JobType.FULL_TIME}>{JobType.FULL_TIME}</option>
