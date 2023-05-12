@@ -39,23 +39,28 @@ const Signup = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label className='font-medium capitalize'>username</label>
-        <input
-          type='text'
-          name='username'
-          onChange={handleChange}
-          className='input_text font-medium'
-        />
-        <br />
-        <label className='font-medium capitalize'>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={handleChange}
-          className='input_text font-medium'
-        />
-        {/* <input type='text' name='' /> */}
-        <br />
+        <div>
+          <label className='font-medium capitalize'>username</label>
+          <input
+            type='text'
+            name='username'
+            onChange={handleChange}
+            className='input_text font-medium'
+          />
+        </div>
+        <div>
+          <label className='font-medium capitalize'>Password</label>
+          <input
+            type='password'
+            name='password'
+            onChange={handleChange}
+            className='input_text font-medium'
+          />
+        </div>
+        <div>
+          <label></label>
+          <input type='text' name='' />
+        </div>
         <input
           type='submit'
           value='Submit'
