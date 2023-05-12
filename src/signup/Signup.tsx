@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import baseInstance from '../axiosInstances/baseInstance';
 import { useNavigate } from 'react-router-dom';
+import { Roles } from '../interface';
 interface SignupData {
   username: string;
   password: string;
@@ -8,6 +9,8 @@ interface SignupData {
 
 const Signup = () => {
   const [data, setData] = useState<SignupData>({ password: '', username: '' });
+  const [adminAccount, setAdminAccount] = useState<boolean>(false);
+  const [adminRefCode, setAdminRefCode] = useState<string>('');
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,12 +23,17 @@ const Signup = () => {
     baseInstance
       .post('/signup', {
         ...data,
+        role: adminAccount ? Roles.ADMIN : Roles.BASIC,
+        adminRefCode,
       })
       .then((res) => {
         console.log(`Signup Successful`);
         navigate('/login');
       })
-      .catch((err) => console.error);
+      .catch((err) => {
+        console.log(`Signup Failed`);
+        console.log(err.response.data);
+      });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +44,15 @@ const Signup = () => {
       };
     });
   };
+
+  const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === Roles.ADMIN) {
+      setAdminAccount(true);
+    } else {
+      setAdminAccount(false);
+    }
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -58,8 +75,32 @@ const Signup = () => {
           />
         </div>
         <div>
-          <label></label>
-          <input type='text' name='' />
+          <div>
+            <span>Account Type</span>
+            <select
+              name='account_type'
+              id='account_type'
+              onChange={handleAccountChange}
+              className='ml-4'
+            >
+              <option value={Roles.BASIC}>Personal</option>
+              <option value={Roles.ADMIN}>ADMIN</option>
+            </select>
+          </div>
+          {adminAccount && (
+            <div>
+              <label>Admin Secret</label>
+              <input
+                type='text'
+                name=''
+                className='input_text font-medium'
+                value={adminRefCode}
+                onChange={(e) => {
+                  setAdminRefCode(e.target.value);
+                }}
+              />
+            </div>
+          )}
         </div>
         <input
           type='submit'
