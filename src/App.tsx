@@ -21,6 +21,7 @@ import JobBoard from './jobBoard/JobBoard';
 import JobPost from './jobBoard/JobPost';
 import { Roles } from './interface';
 import Navigation from './Navigation/Navigation';
+import Profile from './Profile/Profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/jobs' element={<JobBoard />}></Route>
         <Route path='/jobposts' element={<JobPost />}></Route>
+        <Route path='profile' element={<Profile />}></Route>
       </Routes>
     </div>
   );
