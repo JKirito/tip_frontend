@@ -5,10 +5,19 @@ import { Roles } from '../interface';
 interface SignupData {
   username: string;
   password: string;
+  email: string;
+  firstName: string;
+  lastName: string;
 }
 
 const Signup = () => {
-  const [data, setData] = useState<SignupData>({ password: '', username: '' });
+  const [data, setData] = useState<SignupData>({
+    password: '',
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+  });
   const [adminAccount, setAdminAccount] = useState<boolean>(false);
   const [adminRefCode, setAdminRefCode] = useState<string>('');
   const navigate = useNavigate();
@@ -57,10 +66,37 @@ const Signup = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
+          <label className='font-medium capitalize'>First Name</label>
+          <input
+            type='text'
+            name='firstName'
+            onChange={handleChange}
+            className='input_text font-medium'
+          />
+        </div>
+        <div>
+          <label className='font-medium capitalize'>Last Name</label>
+          <input
+            type='text'
+            name='lastName'
+            onChange={handleChange}
+            className='input_text font-medium'
+          />
+        </div>
+        <div>
           <label className='font-medium capitalize'>username</label>
           <input
             type='text'
             name='username'
+            onChange={handleChange}
+            className='input_text font-medium'
+          />
+        </div>
+        <div>
+          <label className='font-medium capitalize'>Email</label>
+          <input
+            type='email'
+            name='email'
             onChange={handleChange}
             className='input_text font-medium'
           />
@@ -74,6 +110,7 @@ const Signup = () => {
             className='input_text font-medium'
           />
         </div>
+
         <div>
           <div>
             <span>Account Type</span>

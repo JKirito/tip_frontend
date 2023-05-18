@@ -43,3 +43,19 @@ export enum JobType {
   VOLUNTEER = 'volunteer',
   OTHER = 'other',
 }
+
+export interface ProfileData {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  phone: string;
+  city: string;
+  state: string;
+  postcode: string;
+  education: string;
+  preferences: string;
+  skills: string;
+  coverLetter: string;
+  email: string;
+  resume: string;
+}
