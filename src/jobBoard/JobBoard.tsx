@@ -10,6 +10,7 @@ import { JobType } from '../interface';
 const JobBoard = () => {
   const dispatch = useDispatch();
   const jobs = useSelector((state: RootState) => state.jobBoard.jobs);
+  const username = useSelector((state: RootState) => state.user.username);
   const [filteredJobs, setFileteredJobs] = useState(jobs);
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
   const [jobTypeFilter, setJobTypeFilter] = useState<JobType>(
@@ -70,6 +71,24 @@ const JobBoard = () => {
     setFileteredJobs(jobs);
   };
 
+  const handleQuickApply = async (job: JobsFetchData) => {
+    // await job.user_id
+    authorizedInstance.post('/quickapply', { job, username }).then(
+      (
+        res: AxiosResponse<{
+          msg: string;
+        }>
+      ) => {
+        console.log(res.data);
+        if (res.data.msg.includes('already')) {
+          alert('You have already applied to this job');
+        } else {
+          alert('Successfully applied to this job');
+        }
+      }
+    );
+  };
+
   return (
     <div>
       <h1 className='text-4xl text-center mt-3 mb-3 capitalize'>Job Board</h1>
@@ -122,7 +141,10 @@ const JobBoard = () => {
               >
                 <div className='text-2xl capitalize'>{job.title}</div>
                 <div className='text-lg  text-gray-500'>
-                  Posted By <span className='font-bold'>{job.username}</span>
+                  Posted By{' '}
+                  <span className='font-bold'>
+                    {job.username === username ? 'You' : job.username}
+                  </span>
                 </div>
                 <div className='flex flex-row justify-between mt-5'>
                   <div className='flex flex-col'>
@@ -168,7 +190,10 @@ const JobBoard = () => {
               >
                 <div className='text-2xl capitalize'>{job.title}</div>
                 <div className='text-lg  text-gray-500'>
-                  Posted By <span className='font-bold'>{job.username}</span>
+                  Posted By{' '}
+                  <span className='font-bold'>
+                    {job.username === username ? 'You' : job.username}
+                  </span>
                 </div>
                 <div className='flex flex-row justify-between mt-5'>
                   <div className='flex flex-col'>
@@ -189,9 +214,20 @@ const JobBoard = () => {
                   <p className='text-lg'>{job.description}</p>
                 </div>
                 <div className='flex w-full mt-5'>
-                  <button className='self-end border-2 rounded-md ml-auto bg-blue-900 text-white text-xl px-4 py-2 hover:bg-blue-700'>
-                    Apply
-                  </button>
+                  {job.username !== username ? (
+                    <button
+                      className='self-end border-2 rounded-md ml-auto bg-blue-900 text-white text-xl px-4 py-2 hover:bg-blue-700'
+                      onClick={() => {
+                        handleQuickApply(job);
+                      }}
+                    >
+                      Quick Apply
+                    </button>
+                  ) : (
+                    <button className='self-end border-2 rounded-md ml-auto bg-gray-400 text-white text-xl px-4 py-2'>
+                      Quick Apply
+                    </button>
+                  )}
                 </div>
               </div>
             );

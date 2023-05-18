@@ -22,6 +22,8 @@ import JobPost from './jobBoard/JobPost';
 import { Roles } from './interface';
 import Navigation from './Navigation/Navigation';
 import Profile from './Profile/Profile';
+import ManageJobs from './ManageJobs/ManageJobs';
+import ViewApplicant from './ViewApplicant/ViewApplicant';
 
 function App() {
   const dispatch = useDispatch();
@@ -63,7 +65,12 @@ function App() {
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/jobs' element={<JobBoard />}></Route>
         <Route path='/jobposts' element={<JobPost />}></Route>
-        <Route path='profile' element={<Profile />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/manage' element={<ManageJobs />}></Route>
+        <Route
+          path='/manage/applicants/:jobId'
+          element={<ViewApplicant />}
+        ></Route>
       </Routes>
     </div>
   );

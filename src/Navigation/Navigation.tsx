@@ -14,6 +14,7 @@ const Navigation = () => {
         <Link to='/'>Home</Link>
         <Link to='/jobposts'>Post a Job</Link>
         <Link to='/jobs'>Jobs</Link>
+        <Link to='/manage'>Manage Jobs</Link>
         <Link to='/profile'>Profile</Link>
       </div>
     </div>
