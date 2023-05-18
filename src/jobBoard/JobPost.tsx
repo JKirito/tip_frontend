@@ -40,6 +40,7 @@ const JobPost = () => {
       .post('/jobpost', { ...post })
       .then((res) => {
         console.log(`Successful Job Creation`);
+        alert('Job Posted Successfully');
       })
       .catch((err) => console.error);
   };

@@ -142,7 +142,7 @@ const JobBoard = () => {
                 <div className='text-2xl capitalize'>{job.title}</div>
                 <div className='text-lg  text-gray-500'>
                   Posted By{' '}
-                  <span className='font-bold'>
+                  <span className='font-bold capitalize'>
                     {job.username === username ? 'You' : job.username}
                   </span>
                 </div>
@@ -191,7 +191,7 @@ const JobBoard = () => {
                 <div className='text-2xl capitalize'>{job.title}</div>
                 <div className='text-lg  text-gray-500'>
                   Posted By{' '}
-                  <span className='font-bold'>
+                  <span className='font-bold capitalize'>
                     {job.username === username ? 'You' : job.username}
                   </span>
                 </div>

@@ -130,6 +130,7 @@ const Profile = () => {
           skills: data.skills,
         };
       });
+      alert('Profile Updated Successfully')
     } catch (err) {
       console.log(err);
     }
