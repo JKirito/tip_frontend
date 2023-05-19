@@ -91,7 +91,9 @@ const JobBoard = () => {
 
   return (
     <div>
-      <h1 className='text-4xl text-center mt-3 mb-3 capitalize'>Job Board</h1>
+      <h1 className='text-3xl text-center mt-3 mb-3 capitalize font-bold'>
+        Job <span className='text-[#68edc6]'>Posting</span>
+      </h1>
       <div>
         <input
           type='text'
@@ -137,10 +139,10 @@ const JobBoard = () => {
             return (
               <div
                 key={index}
-                className='border-2 rounded-md p-5 m-1 shadow-md'
+                className='border-2 border-[#68edc6] rounded-md p-5 m-1 shadow-lg'
               >
                 <div className='text-2xl capitalize'>{job.title}</div>
-                <div className='text-lg  text-gray-500'>
+                <div className='text-lg text-gray-500'>
                   Posted By{' '}
                   <span className='font-bold capitalize'>
                     {job.username === username ? 'You' : job.username}
@@ -186,7 +188,7 @@ const JobBoard = () => {
             return (
               <div
                 key={index}
-                className='border-2 rounded-md p-5 m-1 shadow-md'
+                className='border-2  border-[#68edc6] rounded-md p-5 m-1 shadow-lg'
               >
                 <div className='text-2xl capitalize'>{job.title}</div>
                 <div className='text-lg  text-gray-500'>

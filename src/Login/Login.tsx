@@ -82,39 +82,55 @@ const Login = () => {
       {loginStatus && <Navigate to='/' />}
 
       {!loginStatus && (
-        <form onSubmit={onSubmit}>
-          <span>Username</span>
-          <input
-            type='text'
-            className='input_text'
-            autoComplete='username'
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-          <br />
-          <span>Password</span>
-          <input
-            type='password'
-            className='input_text'
-            autoComplete='current-password'
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <br />
-          <button
-            type='submit'
-            className='btn-green px-7 uppercase font-medium'
-          >
-            Login
-          </button>
-          <p>
-            Don't have an account?{' '}
-            <Link to='/signup'>
-              <span className='underline'>Sign Up</span>
-            </Link>
-          </p>
+        <form
+          className='flex w-[100%] h-[70vh] justify-center items-center'
+          onSubmit={onSubmit}
+        >
+          <div className='flex flex-col gap-4 h-[400px] w-[80%]'>
+            <div className='flex text-center justify-center'>
+              <p className='text-4xl text-center font-semibold text-[#68EDC6]'>
+                System Login
+              </p>
+            </div>
+            <div className='flex flex-col gap-4'>
+              <span className='text-xl font-semibold'>Username</span>
+              <input
+                type='text'
+                className='input_text text-lg'
+                autoComplete='username'
+                placeholder='Username'
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+              />
+            </div>
+            <div className='flex flex-col gap-4'>
+              <span className='text-xl font-semibold'>Password</span>
+              <input
+                type='password'
+                className='input_text text-lg'
+                autoComplete='current-password'
+                placeholder='********'
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </div>
+            <div className='flex justify-center mt-4'>
+              <button
+                type='submit'
+                className='btn-green px-9 uppercase font-semibold text-lg'
+              >
+                Login
+              </button>
+            </div>
+            <p className='text-right text-lg'>
+              Don't have an account?{' '}
+              <Link to='/signup'>
+                <span className='underline'>Sign Up</span>
+              </Link>
+            </p>
+          </div>
         </form>
       )}
     </div>

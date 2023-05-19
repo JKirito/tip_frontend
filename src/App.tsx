@@ -36,7 +36,7 @@ function App() {
       await authorizedInstance
         .get('/validate')
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           dispatch(
             login({
               loginstatus: true,
@@ -56,6 +56,7 @@ function App() {
     };
     validate();
   }, []);
+
   return (
     <div>
       <Navigation />

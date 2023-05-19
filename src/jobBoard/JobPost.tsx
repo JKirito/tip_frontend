@@ -48,28 +48,36 @@ const JobPost = () => {
   return (
     <div className='mt-5'>
       <form className='flex flex-col' onSubmit={handleSubmit}>
-        <p className='self-start text-xl bold'>Post a Job</p>
-        <div className='flex flex-col mt-4'>
-          <label className='self-start text-xl capitalize'>Title</label>
+        <p className='text-2xl font-bold text-center text-[#68EDC6]'>
+          Post a Job
+        </p>
+        <div className='flex flex-col gap-3 mt-4'>
+          <label className='self-start text-xl capitalize font-medium'>
+            Title
+          </label>
           <input
             type='text'
             name='title'
             className='input_text w-1/2'
             onChange={handleChange}
+            placeholder='Job Title'
           />
         </div>
-        <div className='flex justify-between mt-4'>
-          <div className='flex flex-col basis-1/2'>
-            <label className='self-start text-xl capitalize'>Subject</label>
+        <div className='flex justify-between mt-4 gap-4'>
+          <div className='flex flex-col basis-1/2 gap-3'>
+            <label className='self-start text-xl capitalize font-medium'>
+              Subject
+            </label>
             <input
               type='text'
               name='subject'
               className='input_text mr-2'
               onChange={handleChange}
+              placeholder='Subject / Course Code'
             />
           </div>
-          <div className='flex flex-col basis-1/2'>
-            <label className='self-start ml-2 text-xl capitalize'>
+          <div className='flex flex-col basis-1/2 gap-3'>
+            <label className='self-start ml-2 text-xl capitalize font-medium'>
               Location
             </label>
             <input
@@ -77,16 +85,17 @@ const JobPost = () => {
               name='location'
               className='input_text ml-2'
               onChange={handleChange}
+              placeholder='Location'
             />
           </div>
         </div>
 
         <div className='mt-4'>
-          <label className='text-xl capitalize'>Job Type</label>
+          <label className='text-xl capitalize font-medium'>Job Type</label>
           <select
             name=''
             id=''
-            className='text-md ml-4'
+            className='text-md ml-4 font-normal'
             onChange={handleOptionChange}
           >
             <option value={JobType.FULL_TIME}>{JobType.FULL_TIME}</option>
@@ -98,19 +107,22 @@ const JobPost = () => {
           </select>
         </div>
 
-        <div className='flex flex-col mt-4'>
-          <label className='self-start text-xl capitalize'>Description</label>
+        <div className='flex flex-col mt-4 gap-3'>
+          <label className='self-start text-xl capitalize font-medium'>
+            Description
+          </label>
           <textarea
             name='description'
             cols={50}
             rows={20}
             className='input_text basis-full'
             onChange={handleChange}
+            placeholder='Enter the Job Description here'
           ></textarea>
         </div>
         <div className='w-full mt-4'>
           <button
-            className='input_text w-full bg-[#68edc6]  font-bold'
+            className='input_text w-full bg-[#68edc6] border-0 font-medium text-xl'
             type='submit'
           >
             Post a Job

@@ -75,13 +75,14 @@ function ManageJobs() {
 
   return (
     <div>
+      <h1 className='text-3xl mt-5 mb-5'>Manage Jobs</h1>
       <div>
         {jobs.map((job, index) => {
           if (job.username === username) {
             return (
               <div
                 key={index}
-                className='border-2 rounded-md p-5 m-1 shadow-md'
+                className='border-2 border-[#68edc6] rounded-md p-5 m-1 shadow-lg'
               >
                 <div className='text-2xl capitalize'>{job.title}</div>
                 <div className='text-lg  text-gray-500'>

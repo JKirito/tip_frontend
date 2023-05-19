@@ -130,7 +130,7 @@ const Profile = () => {
           skills: data.skills,
         };
       });
-      alert('Profile Updated Successfully')
+      alert('Profile Updated Successfully');
     } catch (err) {
       console.log(err);
     }
@@ -138,35 +138,39 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Profile</h1>
-      <div className='flex flex-row'>
-        <div className='flex flex-col w-1/2'>
-          <label htmlFor='firstname' className='text-lg'>
-            FirstName
+      <h1 className='text-3xl mt-6 text-[#68EDC6] text-center'>
+        Profile Setup
+      </h1>
+      <div className='flex flex-row mt-4 gap-4'>
+        <div className='flex flex-col w-1/2 gap-3'>
+          <label htmlFor='firstname' className='text-xl font-medium'>
+            First Name
           </label>
           <input
             type='text'
             name='firstName'
             value={profile.firstName}
             onChange={handleChange}
-            className='w-full mt-2  input_text'
+            placeholder='First Name'
+            className='w-full mt-2 input_text'
           />
         </div>
-        <div className='flex flex-col w-1/2'>
-          <label htmlFor='lastname' className='text-lg'>
-            LastName
+        <div className='flex flex-col  w-1/2 gap-3'>
+          <label htmlFor='lastname' className='text-xl font-medium'>
+            Last Name
           </label>
           <input
             type='text'
             name='lastName'
             value={profile.lastName}
             onChange={handleChange}
+            placeholder='Last Name'
             className='w-full mt-2 input_text'
           />
         </div>
       </div>
-      <div className='mt-2'>
-        <label htmlFor='email' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='email' className='text-xl font-medium'>
           Email
         </label>
         <input
@@ -175,10 +179,11 @@ const Profile = () => {
           value={profile.email}
           onChange={handleChange}
           className='input_text mt-2 w-full'
+          placeholder='Email For Ex:- user@gmail.com'
         />
       </div>
-      <div className='mt-2'>
-        <label htmlFor='dob' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='dob' className='text-xl font-medium'>
           Date of Birth
         </label>
         <input
@@ -186,11 +191,11 @@ const Profile = () => {
           name='dob'
           value={profile.dob}
           onChange={handleChange}
-          className='ml-4 input_text'
+          className='input_text'
         />
       </div>
-      <div className='mt-2 flex flex-col'>
-        <label htmlFor='phone' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='phone' className='text-xl font-medium'>
           Phone
         </label>
         <input
@@ -199,10 +204,11 @@ const Profile = () => {
           value={profile.phone}
           onChange={handleChange}
           className='input_text'
+          placeholder='Phone Number'
         />
       </div>
-      <div className='mt-2 flex flex-col'>
-        <label htmlFor='city' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='city' className='text-xl font-medium'>
           City
         </label>
         <input
@@ -211,10 +217,11 @@ const Profile = () => {
           value={profile.city}
           onChange={handleChange}
           className='input_text'
+          placeholder='City'
         />
       </div>
-      <div className='mt-2 flex flex-col'>
-        <label htmlFor='state' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='state' className='text-xl font-medium'>
           State
         </label>
         <input
@@ -223,10 +230,11 @@ const Profile = () => {
           value={profile.state}
           onChange={handleChange}
           className='input_text'
+          placeholder='State'
         />
       </div>
-      <div className='mt-2 flex flex-col'>
-        <label htmlFor='postcode' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='postcode' className='text-xl font-medium'>
           Postcode
         </label>
         <input
@@ -235,10 +243,11 @@ const Profile = () => {
           value={profile.postcode}
           onChange={handleChange}
           className='input_text'
+          placeholder='Postcode'
         />
       </div>
-      <div className='mt-2'>
-        <label htmlFor='education' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='education' className='text-xl font-medium'>
           Education
         </label>
         <textarea
@@ -248,10 +257,11 @@ const Profile = () => {
           value={textareaData?.education}
           onChange={handleTextAreaChange}
           className='w-full input_text'
+          placeholder='Enter all of your education details here'
         ></textarea>
       </div>
-      <div className='mt-2'>
-        <label htmlFor='preferences' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='preferences' className='text-xl font-medium'>
           Preferences
         </label>
         <textarea
@@ -261,10 +271,11 @@ const Profile = () => {
           cols={30}
           rows={10}
           className='input_text w-full'
+          placeholder='Enter all of your preferences here, like your preferred work location, preferred work time, availabilities etc.'
         ></textarea>
       </div>
-      <div className='mt-2'>
-        <label htmlFor='skills' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='skills' className='text-xl font-medium'>
           Skills
         </label>
         <textarea
@@ -274,10 +285,11 @@ const Profile = () => {
           cols={30}
           rows={10}
           className='input_text w-full'
+          placeholder='Enter all of your skills here'
         ></textarea>
       </div>
-      <div className='mt-2'>
-        <label htmlFor='coverletter' className='text-lg'>
+      <div className='mt-2 flex flex-col gap-3'>
+        <label htmlFor='coverletter' className='text-xl font-medium'>
           Cover Letter
         </label>
         <textarea
@@ -287,11 +299,12 @@ const Profile = () => {
           cols={30}
           rows={10}
           className='input_text w-full'
+          placeholder='Write your cover letter here or paste it from somewhere else'
         ></textarea>
       </div>
-      <div className='mt-2'>
-        <label htmlFor='resume' className='text-lg'>
-          Resume
+      <div className='flex flex-row gap-3 mt-3'>
+        <label htmlFor='resume' className='text-xl font-medium'>
+          Resume/CV
         </label>
         <input
           type='file'

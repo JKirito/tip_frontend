@@ -88,13 +88,14 @@ const ViewApplicant = () => {
 
   return (
     <div>
-      <div>
+      <div className='mt-4'>
+        <h1 className='text-2xl'>Applicants List</h1>
         {applicants.length > 0 ? (
           applicants.map((applicant, index) => {
             return (
               <div className='w-full flex flex-row' key={index}>
                 <div className='w-1/3 p-3'>
-                  <div className='w-full border-2 border-gray-600 p-8 rounded-md'>
+                  <div className='w-full border-2 border-[#68EDC6] p-8 rounded-md'>
                     <div className='flex flex-row justify-between'>
                       <div>
                         <p className='text-xl font-semibold'>Username</p>
@@ -109,12 +110,14 @@ const ViewApplicant = () => {
                         </span>
                       </div>
                     </div>
-                    <p
-                      className='text-right'
-                      onClick={() => setSelectedProfile(applicant.username)}
-                    >
-                      Review Profile
-                    </p>
+                    <div className='w-full flex mt-5'>
+                      <button
+                        className='text-right btn-green font-semibold text-[#161616]'
+                        onClick={() => setSelectedProfile(applicant.username)}
+                      >
+                        Review Profile
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div className='w-2/3 text-xl p-3'>
@@ -177,11 +180,11 @@ const ViewApplicant = () => {
                         <p className='font-semibold'>Cover Letter</p>
                         <span>{profile.coverLetter}</span>
                       </div>
-                      <div className='flex flex-row mt-5'>
+                      <div className='flex flex-row mt-5 items-center'>
                         <p className='font-semibold'>Resume</p>
                         <a
                           href={profile.resume}
-                          className='ml-6 underline-offset-1 underline'
+                          className='ml-6 btn-green pl-6 pr-6 text-[#161616] font-bold'
                         >
                           Download Resume
                         </a>
