@@ -21,7 +21,6 @@ The front-end part of the application will handle the user interface and user ex
 ReactJS
 Redux
 Axios
-Bootstrap
 MomentJS
 Chart.js
 
